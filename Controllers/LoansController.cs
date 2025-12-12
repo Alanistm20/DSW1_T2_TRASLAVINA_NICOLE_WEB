@@ -37,7 +37,7 @@ public class LoansController : Controller
         }
         catch (Exception ex)
         {
-            // aquí cae el “Sin stock” si tu API responde 400 con mensaje
+            // sin stck
             TempData["Error"] = ex.Message;
         }
         return RedirectToAction(nameof(Index));

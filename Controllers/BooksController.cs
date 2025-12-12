@@ -47,7 +47,7 @@ public class BooksController : Controller
         return RedirectToAction(nameof(Index));
     }
 
-    // Edit básico (pantalla simple)
+    // vista
     [HttpGet]
     public async Task<IActionResult> Edit(int id)
     {
