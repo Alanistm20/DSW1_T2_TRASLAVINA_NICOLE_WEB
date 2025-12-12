@@ -1,0 +1,20 @@
+# Visual Studio
+.vs/
+bin/
+obj/
+
+# User files
+*.user
+*.suo
+*.cache
+*.log
+
+# Rider / VSCode
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+wwwroot/lib/
+node_modules/

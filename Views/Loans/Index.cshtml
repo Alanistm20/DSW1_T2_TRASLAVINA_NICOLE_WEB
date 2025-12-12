@@ -1,0 +1,77 @@
+﻿@using Library.WebApp.Models
+@model List<LoanDto>
+
+@{
+    ViewData["Title"] = "Préstamos";
+    var books = ViewBag.Books as List<BookDto> ?? new();
+}
+
+<div class="container mt-4">
+    <h2>Préstamos Activos</h2>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">@ViewBag.Error</div>
+    }
+    @if (ViewBag.Ok != null)
+    {
+        <div class="alert alert-success">@ViewBag.Ok</div>
+    }
+
+    <div class="card mb-3">
+        <div class="card-header">Registrar préstamo</div>
+        <div class="card-body">
+            <form method="post" asp-action="Create">
+                <div class="row g-2">
+                    <div class="col-md-5">
+                        <select class="form-select" name="BookId" required>
+                            <option value="">-- Selecciona libro --</option>
+                            @foreach (var b in books)
+                            {
+                                <option value="@b.Id">@b.Title (Stock: @b.Stock)</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <input class="form-control" name="StudentName" placeholder="Nombre del alumno" required />
+                    </div>
+                    <div class="col-md-2 d-grid">
+                        <button class="btn btn-primary">Prestar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>BookId</th>
+                <th>Alumno</th>
+                <th>Fecha</th>
+                <th style="width:140px;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var l in Model)
+            {
+                <tr>
+                    <td>@l.Id</td>
+                    <td>@l.BookId</td>
+                    <td>@l.StudentName</td>
+                    <td>@l.LoanDate.ToString("yyyy-MM-dd")</td>
+                    <td>
+                        <form method="post" asp-action="Return" asp-route-id="@l.Id">
+                            <button class="btn btn-sm btn-success">Devolver</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a class="btn btn-outline-secondary" asp-controller="Books" asp-action="Index">
+        Volver a Libros
+    </a>
+</div>

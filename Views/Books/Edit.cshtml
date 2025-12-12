@@ -1,0 +1,33 @@
+﻿@model Library.WebApp.Models.CreateBookDto
+@{
+    ViewData["Title"] = "Editar Libro";
+    var id = (int)ViewBag.BookId;
+}
+
+<div class="container mt-4">
+    <h2>Editar Libro #@id</h2>
+
+    <form method="post" asp-action="Edit" asp-route-id="@id" class="card p-3">
+        <div class="mb-2">
+            <label class="form-label">Título</label>
+            <input class="form-control" asp-for="Title" required />
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Autor</label>
+            <input class="form-control" asp-for="Author" required />
+        </div>
+        <div class="mb-2">
+            <label class="form-label">ISBN</label>
+            <input class="form-control" asp-for="Isbn" required />
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Stock</label>
+            <input class="form-control" asp-for="Stock" type="number" min="0" required />
+        </div>
+
+        <div class="d-flex gap-2">
+            <button class="btn btn-primary">Guardar cambios</button>
+            <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+        </div>
+    </form>
+</div>
